@@ -1,7 +1,7 @@
 ---
 - hosts: all
   tasks:
-    - shell: nc -zv "{{ ip_addr }}" 22
+    - shell: nc -zv "{{ ip_addr }}" "{{ test_port }}"
       register: find_output
     - debug:
         var: find_output

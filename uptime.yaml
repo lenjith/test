@@ -1,8 +1,15 @@
----
-- hosts: all
+- name: Test Telnet Connectivity
+  hosts: all
+  gather_facts: false
+  
   tasks:
-    - shell: nc -zv "{{ ip_addr }}" "{{ test_port }}"
-      register: find_output
-    - debug:
-        var: find_output
-
+    - name: Test Telnet Connection
+      wait_for:
+        host: "{{ destination_ip }}"
+        port: 22
+        state: started
+      register: telnet_result
+  
+    - name: Print Telnet Result
+      debug:
+        var: telnet_result

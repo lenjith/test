@@ -1,6 +1,5 @@
 ---
 - hosts: all
   tasks:
-    - shell: nc -zv 192.168.1.40 {{ item }} 
-      with_items: [80,443,8443,22]
+    - shell: nc -zv 192.168.1.40 22
 

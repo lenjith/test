@@ -1,12 +1,6 @@
-- name: Check all port numbers are accessible from the current host
-  wait_for:
-    host: 192.168.1.40
-    port: "{{ item }}"
-    state: started         # Port should be open
-    delay: 0               # No wait before first check (sec)
-    timeout: 3             # Stop checking after timeout (sec)
-  ignore_errors: yes
-  with_items:
-    - 22
-    - 80
+---
+- hosts: all
+  tasks:
+    - shell: nc -z -w 1 -G 1 192.168.1.40 {{ item }} || echo "Port {{ item }} is closed"
+      with_items: [80,443,8443,22]
 

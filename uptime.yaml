@@ -1,15 +1,12 @@
-- name: Get the list of all the nodes which are running over a month
-  hosts: all
-  gather_facts: false
-  tasks:
-
-      - name: Show hostname for sanity check (or just use -v flag for verbose)
-        command: hostname
-        register: hostname
-      - debug: var=hostname.stdout_lines
-
-      - name: Check uptime prior reboot
-        shell: cut -d ' ' -f1 /proc/uptime
-        register: UPTIME_PRE_REBOOT
-      - debug: var=UPTIME_PRE_REBOOT
-   
+- name: Check all port numbers are accessible from the current host
+  wait_for:
+    host: mywebserver.com
+    port: "{{ item }}"
+    state: started         # Port should be open
+    delay: 0               # No wait before first check (sec)
+    timeout: 3             # Stop checking after timeout (sec)
+  ignore_errors: yes
+  with_items:
+    - 443
+    - 80
+    - 80443

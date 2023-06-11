@@ -1,12 +1,12 @@
 - name: Check all port numbers are accessible from the current host
   wait_for:
-    host: mywebserver.com
+    host: 192.168.1.40
     port: "{{ item }}"
     state: started         # Port should be open
     delay: 0               # No wait before first check (sec)
     timeout: 3             # Stop checking after timeout (sec)
   ignore_errors: yes
   with_items:
-    - 443
+    - 22
     - 80
-    - 80443
+

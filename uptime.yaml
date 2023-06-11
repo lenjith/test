@@ -2,4 +2,7 @@
 - hosts: all
   tasks:
     - shell: nc -zv "{{ ip_addr }}" 22
+      register: find_output
+    - debug:
+      var: find_output
 

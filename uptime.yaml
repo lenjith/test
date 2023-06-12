@@ -9,7 +9,7 @@
       register: hostname_output
 
     - name: Get uptime
-      command: uptime |cut -d " " -f 4
+      command: uptime -p
       register: uptime_output
 
     - name: Display hostname and uptime

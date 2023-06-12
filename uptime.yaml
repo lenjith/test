@@ -5,7 +5,7 @@
   tasks:
   - name: test connectivity
     shell:
-      cmd: "nc -vz {{ inventory_hostname }} {{ port_number }}"
+      cmd: nc -vz {{ inventory_hostname }} {{ port_number }}
       register: result
 
   - name: Show result

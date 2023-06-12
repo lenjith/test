@@ -6,7 +6,7 @@
   - name: test connectivity
     shell:
       cmd: nc -vz {{ inventory_hostname }} {{ port_number }}
-      register: result
+    register: result
 
   - name: Show result
     debug:

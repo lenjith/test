@@ -1,17 +1,17 @@
 ---
-- name: Display system uptime
-  hosts: all
+- name: Display hostname and uptime
+  hosts: your_server_group
   gather_facts: yes
 
   tasks:
+    - name: Get hostname
+      command: hostname
+      register: hostname_output
+
     - name: Get uptime
-      command: uptime -s
+      command: uptime |cut -d " " -f 4
       register: uptime_output
 
-    - name: Calculate number of days
-      set_fact:
-        uptime_days: "{{ (ansible_date_time.epoch | float - uptime_output.stdout | float) / 86400 | int }}"
-
-    - name: Display system uptime
+    - name: Display hostname and uptime
       debug:
-        msg: "System uptime: {{ uptime_days }} days"
+        msg: "Hostname: {{ hostname_output.stdout }} - Uptime: {{ uptime_output.stdout }} days"

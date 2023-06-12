@@ -1,6 +1,6 @@
 ---
 - name: Display hostname and uptime
-  hosts: your_server_group
+  hosts: all
   gather_facts: yes
 
   tasks:
